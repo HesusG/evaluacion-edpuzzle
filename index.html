@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluación de una actividad en Edpuzzle</title>
+<meta name="description" content="Revisión de usabilidad de la actividad «Velocidad lectora 70 ppm» en Edpuzzle: qué se evaluó, qué problemas encontré y qué cambiaría.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg: oklch(0.985 0.004 250);
+  --surface: oklch(1 0 0);
+  --ink: oklch(0.24 0.03 255);
+  --ink-soft: oklch(0.44 0.03 255);
+  --line: oklch(0.9 0.01 255);
+  --brand: oklch(0.5 0.15 262);
+  --brand-soft: oklch(0.95 0.03 262);
+  --high: oklch(0.52 0.17 30);
+  --high-soft: oklch(0.95 0.035 30);
+  --mid: oklch(0.5 0.11 75);
+  --mid-soft: oklch(0.95 0.05 85);
+  --ok: oklch(0.48 0.11 155);
+  --ok-soft: oklch(0.95 0.04 155);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg: oklch(0.2 0.015 255); --surface: oklch(0.25 0.018 255); --ink: oklch(0.95 0.01 255); --ink-soft: oklch(0.78 0.02 255);
+    --line: oklch(0.34 0.02 255); --brand: oklch(0.75 0.12 262); --brand-soft: oklch(0.32 0.05 262);
+    --high: oklch(0.78 0.12 30); --high-soft: oklch(0.33 0.06 30); --mid: oklch(0.82 0.11 80); --mid-soft: oklch(0.33 0.05 80);
+    --ok: oklch(0.8 0.1 155); --ok-soft: oklch(0.31 0.05 155);
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:18px;line-height:1.6}
+main{max-width:820px;margin:0 auto;padding:40px 20px 64px}
+h1,h2,h3{line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:2.2rem}
+h2{font-size:1.5rem;margin:56px 0 14px}
+h3{font-size:1.25rem}
+p{margin:0 0 12px;text-wrap:pretty}
+a{color:var(--brand)}
+.meta{color:var(--ink-soft);margin-top:8px}
+.lead{font-size:1.15rem;margin-top:22px}
+
+.what{background:var(--brand-soft);border-radius:18px;padding:22px 24px;margin-top:28px}
+.what h2{margin:0 0 12px;font-size:1.3rem}
+.what dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:10px 18px}
+.what dt{font-weight:700}
+.what dd{margin:0}
+@media (max-width:600px){.what dl{grid-template-columns:1fr;gap:2px}.what dd{margin-bottom:10px}}
+
+.summary{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 4px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9rem;border-radius:999px;padding:3px 12px;white-space:nowrap}
+.tag.high{background:var(--high-soft);color:var(--high)}
+.tag.mid{background:var(--mid-soft);color:var(--mid)}
+.tag.src{background:var(--surface);border:1.5px solid var(--line);color:var(--ink-soft)}
+
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:12px}
+.legend div{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font-size:1rem}
+.legend b{display:block;margin-bottom:4px}
+
+.finding{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:24px;margin-top:20px}
+.finding header{display:flex;gap:14px;align-items:flex-start}
+.num{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--brand-soft);color:var(--brand)}
+.finding .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.finding h4{font-size:.85rem;text-transform:none;color:var(--ink-soft);margin:18px 0 4px;font-weight:700}
+.principle{background:var(--bg);border-radius:12px;padding:12px 14px;font-size:1rem}
+.principle small{color:var(--ink-soft);display:block;margin-top:2px}
+.fix{background:var(--ok-soft);border-radius:12px;padding:12px 14px}
+.fix strong{color:var(--ok)}
+.note{border:1.5px dashed var(--line);border-radius:12px;padding:12px 14px;font-size:1rem;color:var(--ink-soft)}
+figure{margin:16px 0 0}
+figure img{width:100%;height:auto;border-radius:12px;border:1.5px solid var(--line);display:block;background:#fff}
+figcaption{font-size:.9rem;color:var(--ink-soft);margin-top:6px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pair.wide{grid-template-columns:3fr 1fr;align-items:start}
+@media (max-width:600px){.pair,.pair.wide{grid-template-columns:1fr}}
+
+table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:16px;overflow:hidden;font-size:1rem}
+th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1.5px solid var(--line)}
+th{background:var(--brand-soft);font-size:.95rem}
+tr:last-child td{border-bottom:none}
+@media (max-width:700px){
+  table,thead,tbody,tr,th,td{display:block}
+  thead{display:none}
+  tr{border-bottom:1.5px solid var(--line);padding:8px 0}
+  td{border:none;padding:4px 14px}
+  td::before{content:attr(data-l);display:block;font-weight:700;font-size:.85rem;color:var(--ink-soft)}
+}
+.pending{background:var(--mid-soft);border-radius:16px;padding:18px 20px}
+.pending ol{margin:8px 0 0;padding-left:22px}
+footer{margin-top:56px;color:var(--ink-soft);font-size:.95rem;border-top:1.5px solid var(--line);padding-top:18px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Evaluación de una actividad en Edpuzzle</h1>
+  <p class="meta">Revisión entre equipos · Hesus García · noviembre 2026</p>
+
+  <section class="what" aria-labelledby="que">
+    <h2 id="que">¿Qué se evalúa?</h2>
+    <dl>
+      <dt>La actividad</dt>
+      <dd>«Velocidad lectora 70 ppm», una lección de Edpuzzle de otro equipo. Es un video de 1 minuto 28 segundos donde aparecen palabras una por una, con una nota al inicio y una pregunta al final: «¿Recuerdas al menos 10 palabras?».</dd>
+      <dt>La pregunta</dt>
+      <dd>¿Un alumno puede hacer la actividad sin ayuda, y la actividad mide lo que promete: leer en voz alta 70 palabras por minuto?</dd>
+      <dt>Cómo lo revisé</dt>
+      <dd>Entré como alumno con la liga de la clase abierta, hice la actividad completa y tomé una captura de cada problema.</dd>
+    </dl>
+  </section>
+
+  <h2>Resultado en una frase</h2>
+  <p class="lead">La actividad es fácil de abrir, pero <strong>no mide la velocidad lectora</strong>: el video va mucho más lento que la meta, nadie escucha la lectura y se puede saltar hasta el final.</p>
+  <div class="summary">
+    <span class="tag high">3 problemas importantes</span>
+    <span class="tag mid">2 problemas menores</span>
+  </div>
+
+  <h2>Cómo leer cada problema</h2>
+  <div class="legend">
+    <div><b>Gravedad</b><span class="tag mid">Menor</span> estorba, pero se puede seguir.<br><span class="tag high">Importante</span> afecta lo que el alumno aprende o el resultado.</div>
+    <div><b>¿De dónde viene?</b><strong>Edpuzzle:</strong> así funciona la plataforma.<br><strong>Configuración:</strong> una opción que el docente puede cambiar.<br><strong>Diseño:</strong> cómo se armó la actividad.</div>
+    <div><b>Principio de usabilidad</b>La regla de diseño que no se cumple, en palabras simples. Abajo va el nombre técnico (Nielsen y Norman).</div>
+  </div>
+
+  <h2>Problemas encontrados</h2>
+
+  <article class="finding">
+    <header><span class="num">1</span><div>
+      <h3>El video no va a 70 palabras por minuto</h3>
+      <div class="tags"><span class="tag high">Importante</span><span class="tag src">Diseño</span></div>
+    </div></header>
+    <h4>Qué pasó</h4>
+    <p>El título promete 70 palabras por minuto, pero el video muestra una palabra cada 12 segundos más o menos: <em>amigo</em> en 0:25, <em>lápiz</em> en 0:37, <em>dibujar</em> en 0:49, <em>triste</em> en 1:03. Eso es cerca de 5 palabras por minuto. Además, la pregunta final pide recordar 10 palabras y en el video aparecen unas 5.</p>
+    <p class="note"><strong>Para entender el concepto:</strong> la velocidad lectora es cuántas palabras lee una persona en voz alta en un minuto. A 70 palabras por minuto, cada palabra debería durar menos de un segundo en pantalla, no 12.</p>
+    <h4>Principio que no se cumple</h4>
+    <p class="principle">Lo que la actividad promete debe coincidir con lo que muestra.<small>Nielsen: consistencia y estándares · Norman: correspondencia</small></p>
+    <h4>Qué cambiaría</h4>
+    <p class="fix"><strong>Mejora:</strong> ajustar el ritmo del video a la meta (una palabra cada 0.9 segundos, o mostrar renglones de texto) o cambiar el título y la pregunta para que coincidan con lo que se ve.</p>
+    <div class="pair">
+      <figure><img src="img/amigo.jpg" alt="Video en el segundo 25 mostrando solo la palabra amigo" loading="lazy"><figcaption>0:25 · «amigo»</figcaption></figure>
+      <figure><img src="img/dibujar.jpg" alt="Video en el segundo 49 mostrando solo la palabra dibujar" loading="lazy"><figcaption>0:49 · «dibujar», 24 segundos y dos palabras después</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="finding">
+    <header><span class="num">2</span><div>
+      <h3>Nadie registra la lectura en voz alta</h3>
+      <div class="tags"><span class="tag high">Importante</span><span class="tag src">Diseño</span></div>
+    </div></header>
+    <h4>Qué pasó</h4>
+    <p>La actividad pide leer en voz alta, pero si el profesor no está presente, nada registra la lectura. La única evidencia es una pregunta de memoria, así que la docente no puede saber la velocidad lectora real del alumno.</p>
+    <h4>Principio que no se cumple</h4>
+    <p class="principle">La actividad debe dejar ver lo que hizo el alumno.<small>Nielsen: visibilidad del estado del sistema · Norman: retroalimentación</small></p>
+    <h4>Qué cambiaría</h4>
+    <p class="fix"><strong>Mejora:</strong> pedir que el alumno grabe su lectura. Edpuzzle tiene la opción «Allow audio responses» en las preguntas abiertas.</p>
+    <figure><img src="img/pregunta.jpg" alt="Pregunta abierta: ¿Recuerdas al menos 10 palabras? Cuáles. Respuesta escrita, marcada To be graded" loading="lazy"><figcaption>La única evidencia es una respuesta escrita de memoria.</figcaption></figure>
+  </article>
+
+  <article class="finding">
+    <header><span class="num">3</span><div>
+      <h3>Se puede saltar el video hasta el final</h3>
+      <div class="tags"><span class="tag high">Importante</span><span class="tag src">Configuración</span></div>
+    </div></header>
+    <h4>Qué pasó</h4>
+    <p>Desde el segundo 0 di clic en 1:17 y la actividad se marcó como «Video completed 100%» sin ver las palabras. En un ejercicio de lectura eso invalida la práctica.</p>
+    <h4>Principio que no se cumple</h4>
+    <p class="principle">La actividad debe impedir los atajos que arruinan el ejercicio.<small>Nielsen: prevención de errores · Norman: restricciones</small></p>
+    <h4>Qué cambiaría</h4>
+    <p class="fix"><strong>Mejora:</strong> activar «Prevent skipping» en la configuración de la asignación.</p>
+    <div class="pair wide">
+      <figure><img src="img/salto.jpg" alt="Pantalla Another lesson down después de saltar el video" loading="lazy"><figcaption>Después de saltar a 1:17, la lección ya aparece como terminada.</figcaption></figure>
+      <figure><img src="img/resumen.jpg" alt="Resumen: Video completed 100 por ciento" loading="lazy"><figcaption>«Video completed 100%»</figcaption></figure>
+    </div>
+  </article>
+
+  <article class="finding">
+    <header><span class="num">4</span><div>
+      <h3>La asignación no tiene instrucciones</h3>
+      <div class="tags"><span class="tag mid">Menor</span><span class="tag src">Configuración</span></div>
+    </div></header>
+    <h4>Qué pasó</h4>
+    <p>Antes de dar Start, el alumno no sabe qué se espera de él: no hay instrucciones en la asignación.</p>
+    <h4>Principio que no se cumple</h4>
+    <p class="principle">El alumno debe ver qué hacer, no adivinarlo.<small>Nielsen: reconocer antes que recordar · Norman: señales y descubribilidad</small></p>
+    <h4>Qué cambiaría</h4>
+    <p class="fix"><strong>Mejora:</strong> agregar instrucciones breves: leer en voz alta, cuánto dura y qué se entrega.</p>
+    <figure><img src="img/portada.jpg" alt="Portada de la asignación con el botón Start y sin texto de instrucciones" loading="lazy"><figcaption>Portada de la asignación: título, botón Start y nada más.</figcaption></figure>
+  </article>
+
+  <article class="finding">
+    <header><span class="num">5</span><div>
+      <h3>Un apodo con acento no deja entrar</h3>
+      <div class="tags"><span class="tag mid">Menor</span><span class="tag src">Edpuzzle</span></div>
+    </div></header>
+    <h4>Qué pasó</h4>
+    <p>Al entrar a la clase abierta, el apodo «Hesus G - revisión» se rechaza con el mensaje «Invalid 'nickname' provided», sin decir qué está mal. Sin el acento («revision») sí entra.</p>
+    <h4>Principio que no se cumple</h4>
+    <p class="principle">Un error debe explicar qué pasó y cómo arreglarlo.<small>Nielsen: prevención de errores · Norman: retroalimentación y restricciones</small></p>
+    <h4>Qué cambiaría</h4>
+    <p class="fix"><strong>Mejora:</strong> la docente puede avisar «escribe tu nombre sin acentos» junto a la liga. Edpuzzle debería decir qué caracteres se permiten.</p>
+    <figure><img src="img/apodo.jpg" alt="Pantalla de clase abierta con el apodo rechazado y el mensaje Invalid nickname provided" loading="lazy"><figcaption>El mensaje no dice que el problema es el acento.</figcaption></figure>
+  </article>
+
+  <h2>Qué cambiaría primero y cómo lo comprobaría</h2>
+  <p>Después del cambio, otra persona repetiría la misma tarea para ver si el problema desaparece.</p>
+  <table>
+    <thead><tr><th>Problema</th><th>Cambio</th><th>Qué espero</th><th>Cómo lo pruebo</th></tr></thead>
+    <tbody>
+      <tr><td data-l="Problema">El ritmo no es de 70 ppm ni hay 10 palabras</td><td data-l="Cambio">Rehacer el video al ritmo de la meta, o cambiar título y pregunta</td><td data-l="Qué espero">El alumno puede responder lo que se le pide y el ejercicio mide lo que promete</td><td data-l="Cómo lo pruebo">«Haz el ejercicio de lectura y dime cuántas palabras leíste.»</td></tr>
+      <tr><td data-l="Problema">No queda claro que la respuesta se guardó</td><td data-l="Cambio">Poner la pregunta al final del video, con un mensaje de la docente y la interfaz en español</td><td data-l="Qué espero">El alumno reconoce que su respuesta quedó registrada</td><td data-l="Cómo lo pruebo">«Contesta la pregunta del video y dime si tu respuesta quedó guardada.»</td></tr>
+      <tr><td data-l="Problema">Se puede saltar el video</td><td data-l="Cambio">Activar «Prevent skipping» y agregar instrucciones</td><td data-l="Qué espero">Todos los alumnos ven la secuencia completa de palabras</td><td data-l="Cómo lo pruebo">«Intenta terminar la actividad lo más rápido posible.»</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Pendiente: prueba con usuarios</h2>
+  <div class="pending">
+    <p>Esta revisión la hice yo solo, como alumno. El siguiente paso es observar a otras personas haciendo estas tareas, sin ayudarles:</p>
+    <ol>
+      <li>Entra a la clase con la liga que te compartió tu maestra y escribe tu nombre como apodo.</li>
+      <li>Haz el ejercicio de lectura y al terminar dime cuántas palabras leíste.</li>
+      <li>Contesta la pregunta del video y dime si tu respuesta quedó guardada.</li>
+      <li>Entrega la actividad y busca dónde ves tu resultado.</li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Referencias: <a href="https://www.nngroup.com/articles/ten-usability-heuristics/">Nielsen, 10 heurísticas de usabilidad</a> · <a href="https://www.nngroup.com/articles/usability-testing-101/">Pruebas de usabilidad</a> · Norman, D. (2013). <em>The Design of Everyday Things</em>. Basic Books.</p>
+    <p>En las capturas difuminé los nombres de las personas.</p>
+  </footer>
+</main>
+</body>
+</html>
