@@ -4,272 +4,301 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Heurísticas en 10 minutos</title>
-<meta name="description" content="Los principios de diseño de Don Norman explicados en lenguaje sencillo, con ejemplos de la vida diaria y de Edpuzzle, práctica y una lista para revisar tu propia actividad.">
+<meta name="description" content="Para profesores: la gran idea detrás de las heurísticas de Nielsen y Norman, en 5 preguntas sencillas para revisar cualquier actividad digital.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg: oklch(0.985 0.004 250);
   --surface: oklch(1 0 0);
   --ink: oklch(0.24 0.03 255);
-  --ink-soft: oklch(0.44 0.03 255);
-  --line: oklch(0.9 0.01 255);
+  --ink-soft: oklch(0.45 0.03 255);
+  --line: oklch(0.9 0.012 255);
   --brand: oklch(0.5 0.15 262);
   --brand-soft: oklch(0.95 0.03 262);
-  --warm: oklch(0.5 0.11 75);
-  --warm-soft: oklch(0.95 0.05 85);
-  --ok: oklch(0.48 0.11 155);
+  --warm: oklch(0.5 0.11 70);
+  --warm-soft: oklch(0.96 0.045 85);
+  --ok: oklch(0.47 0.11 155);
   --ok-soft: oklch(0.95 0.04 155);
-  --bad: oklch(0.52 0.17 30);
-  --bad-soft: oklch(0.95 0.035 30);
+  --bad: oklch(0.52 0.16 30);
+  --bad-soft: oklch(0.955 0.03 30);
 }
 @media (prefers-color-scheme: dark){
   :root{
     --bg: oklch(0.2 0.015 255); --surface: oklch(0.25 0.018 255); --ink: oklch(0.95 0.01 255); --ink-soft: oklch(0.78 0.02 255);
-    --line: oklch(0.34 0.02 255); --brand: oklch(0.75 0.12 262); --brand-soft: oklch(0.32 0.05 262);
-    --warm: oklch(0.82 0.11 80); --warm-soft: oklch(0.33 0.05 80); --ok: oklch(0.8 0.1 155); --ok-soft: oklch(0.31 0.05 155);
-    --bad: oklch(0.78 0.12 30); --bad-soft: oklch(0.33 0.06 30);
+    --line: oklch(0.34 0.02 255); --brand: oklch(0.76 0.12 262); --brand-soft: oklch(0.31 0.05 262);
+    --warm: oklch(0.83 0.11 80); --warm-soft: oklch(0.32 0.05 80); --ok: oklch(0.8 0.1 155); --ok-soft: oklch(0.3 0.05 155);
+    --bad: oklch(0.79 0.11 30); --bad-soft: oklch(0.32 0.05 30);
   }
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:18px;line-height:1.6}
-main{max-width:820px;margin:0 auto;padding:40px 20px 64px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-size:16px;line-height:1.6}
+main{max-width:600px;margin:0 auto;padding:28px 18px 72px}
 h1,h2,h3{line-height:1.2;text-wrap:balance;margin:0}
-h1{font-size:2.3rem}
-h2{font-size:1.5rem;margin:56px 0 14px}
-h3{font-size:1.2rem}
-p{margin:0 0 12px;text-wrap:pretty}
+h2{font-size:1.2rem;margin:0 0 10px}
+h3{font-size:1.05rem}
+p{margin:0 0 10px;text-wrap:pretty}
 a{color:var(--brand)}
-.meta{color:var(--ink-soft);margin-top:8px}
-.lead{font-size:1.2rem;margin-top:20px}
+.kicker{font-size:.82rem;font-weight:700;color:var(--brand);margin-bottom:6px}
+.soft{color:var(--ink-soft)}
 
-.time{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.time a{text-decoration:none;font-weight:700;font-size:.92rem;background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--ink-soft)}
-.time a:hover{border-color:var(--brand);color:var(--brand)}
+.progress{position:fixed;top:0;left:0;right:0;height:4px;z-index:10}
+.progress i{display:block;height:100%;width:100%;transform-origin:left;transform:scaleX(0);background:var(--brand)}
 
-.why{background:var(--brand-soft);border-radius:18px;padding:22px 24px;margin-top:28px}
-.why h2{margin:0 0 10px;font-size:1.3rem}
-.why ul{margin:0;padding-left:20px}
-.why li{margin:4px 0}
+.cover{min-height:62vh;display:flex;flex-direction:column;justify-content:center;padding:24px 0 8px}
+.cover h1{font-family:"Literata",Georgia,serif;font-weight:600;font-size:2.05rem;letter-spacing:-.01em;margin-bottom:14px}
+.big{font-family:"Literata",Georgia,serif;font-weight:600;font-size:1.3rem;line-height:1.3;margin:0}
+.big em{font-style:normal;color:var(--brand)}
+.scrollhint{margin-top:18px;font-size:.88rem;color:var(--ink-soft)}
+.scrollhint span{display:inline-block;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(4px)}}
 
-.think{background:var(--warm-soft);border-radius:18px;padding:20px 24px}
-.think strong{color:var(--warm)}
+.step{padding:34px 0;border-top:1.5px solid var(--line)}
+.door{display:flex;gap:14px;align-items:flex-start;background:var(--warm-soft);border-radius:14px;padding:14px 16px}
+.door b{color:var(--warm)}
+.door .emoji{font-size:1.8rem;line-height:1}
 
-.gulfs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.gulf{background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:18px}
-.gulf b{display:block;font-size:1.15rem;margin-bottom:4px}
-.gulf .q{font-size:1.35rem;font-weight:700;color:var(--brand);margin:4px 0 8px}
-@media (max-width:600px){.gulfs{grid-template-columns:1fr}}
+.loop{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin:14px 0 6px;text-align:center}
+.loop .q{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:12px 10px}
+.loop .q b{display:block;font-size:1.05rem;color:var(--brand)}
+.loop .q small{color:var(--ink-soft);font-size:.82rem}
+.loop .arrow{font-size:1.3rem;color:var(--ink-soft)}
+.loopnote{font-size:.88rem;color:var(--ink-soft);text-align:center}
 
-.principle{background:var(--surface);border:1.5px solid var(--line);border-radius:20px;padding:22px 24px;margin-top:16px}
-.principle header{display:flex;gap:14px;align-items:center;margin-bottom:10px}
-.icon{flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:1.6rem;background:var(--brand-soft)}
-.principle header small{display:block;color:var(--ink-soft);font-size:.9rem}
-.oneline{font-size:1.15rem;font-weight:700;margin-bottom:12px}
-.ex{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.ex div{border-radius:12px;padding:12px 14px;font-size:1rem}
-.ex .life{background:var(--bg)}
-.ex .edp{background:var(--bad-soft)}
-.ex span{display:block;font-weight:700;font-size:.85rem;color:var(--ink-soft);margin-bottom:2px}
-.ask{margin-top:12px;background:var(--ok-soft);border-radius:12px;padding:10px 14px;font-size:1rem}
-.ask b{color:var(--ok)}
-@media (max-width:600px){.ex{grid-template-columns:1fr}}
+.track{position:relative;margin-top:16px;padding-left:34px}
+.track::before{content:"";position:absolute;left:12px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.q5{position:relative;margin-bottom:22px}
+.q5 .n{position:absolute;left:-34px;top:0;width:26px;height:26px;border-radius:50%;background:var(--brand);color:var(--surface);font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.q5 h3{font-size:1.08rem}
+.q5 .tag{font-size:.78rem;color:var(--ink-soft);margin:2px 0 6px}
+.q5 .idea{margin:0 0 6px}
+details{background:var(--surface);border:1.5px solid var(--line);border-radius:12px;font-size:.92rem}
+summary{cursor:pointer;padding:8px 12px;font-weight:700;color:var(--brand);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+ "}
+details[open] summary::before{content:"− "}
+details .body{padding:0 12px 10px}
+details .body p{margin:4px 0}
+details .body b{font-size:.78rem;color:var(--ink-soft);display:block;margin-top:6px}
+.fix{color:var(--ok);font-weight:700}
 
-.quiz{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:20px 22px;margin-top:14px}
-.quiz p{font-weight:700;margin-bottom:10px}
-.opts{display:flex;flex-wrap:wrap;gap:8px}
-.opts button{font:inherit;font-size:1rem;cursor:pointer;background:var(--bg);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;padding:8px 16px;min-height:44px;transition:border-color .15s, background .15s}
+.answers{list-style:none;margin:10px 0 0;padding:0}
+.answers li{display:flex;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.answers li:last-child{border-bottom:none}
+.ans{flex:none;font-weight:700;font-size:.78rem;border-radius:999px;padding:1px 9px}
+.ans.no{background:var(--bad-soft);color:var(--bad)}
+.ans.part{background:var(--warm-soft);color:var(--warm)}
+
+.quiz{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:14px;margin-top:10px}
+.quiz p{font-weight:700;margin-bottom:8px;font-size:.95rem}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts button{font:inherit;font-size:.86rem;cursor:pointer;background:var(--bg);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;padding:6px 12px;min-height:36px;transition:border-color .15s, background .15s}
 .opts button:hover{border-color:var(--brand)}
 .opts button.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ok);font-weight:700}
 .opts button.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
-.fb{margin-top:10px;font-size:1rem;min-height:1.6em}
-:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
-.score{font-weight:700;margin-top:14px}
+.fb{margin-top:8px;font-size:.88rem;min-height:1.4em}
+.score{font-weight:700;margin-top:10px;font-size:.95rem}
 
-.check{list-style:none;padding:0;margin:0}
-.check li{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;margin-top:10px}
-.check label{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;cursor:pointer}
-.check input{width:22px;height:22px;margin-top:3px;flex:none;accent-color:var(--ok)}
+.check{list-style:none;padding:0;margin:10px 0 0}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:.95rem}
+.check input{width:19px;height:19px;margin-top:3px;flex:none;accent-color:var(--ok)}
 .check small{display:block;color:var(--ink-soft)}
+.btn{font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;border-radius:999px;padding:8px 16px;border:1.5px solid var(--brand);background:transparent;color:var(--brand);margin-top:12px}
 
-table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:16px;overflow:hidden;font-size:1rem}
-th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1.5px solid var(--line)}
-th{background:var(--brand-soft)}
-tr:last-child td{border-bottom:none}
-@media (max-width:700px){
-  table,thead,tbody,tr,th,td{display:block}
-  thead{display:none}
-  tr{border-bottom:1.5px solid var(--line);padding:8px 0}
-  td{border:none;padding:4px 14px}
-  td::before{content:attr(data-l);display:block;font-weight:700;font-size:.85rem;color:var(--ink-soft)}
+.recap{background:var(--brand-soft);border-radius:16px;padding:18px}
+footer{margin-top:36px;color:var(--ink-soft);font-size:.82rem}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+
+.js .reveal{opacity:.001;transform:translateY(14px);transition:opacity .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1)}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  .scrollhint span{animation:none}
 }
-
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
-.btn{font:inherit;font-weight:700;cursor:pointer;border-radius:999px;padding:10px 20px;border:1.5px solid var(--brand);background:var(--brand);color:var(--surface);text-decoration:none}
-.btn.ghost{background:transparent;color:var(--brand)}
-footer{margin-top:56px;color:var(--ink-soft);font-size:.95rem;border-top:1.5px solid var(--line);padding-top:18px}
 @media print{
-  .time,.actions,#practica,.quiz{display:none}
-  body{font-size:14px} h2{margin-top:28px}
-  .principle,.check li{break-inside:avoid}
+  .progress,.scrollhint,#practica{display:none}
+  .cover{min-height:0}
+  .js .reveal{opacity:1;transform:none}
 }
-@media (prefers-reduced-motion: reduce){*{transition:none!important}}
-.ans{font-weight:700;border-radius:999px;padding:2px 10px;white-space:nowrap;font-size:.9rem}
-.ans.no{background:var(--high-soft,var(--bad-soft));color:var(--high,var(--bad))}
-.ans.part{background:var(--mid-soft,var(--warm-soft));color:var(--mid,var(--warm))}
-.q5 td small{display:block;color:var(--ink-soft);font-size:.85rem}
 </style>
 </head>
 <body>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
 <main>
-  <p class="meta"><a href="./">← Volver a la evaluación de Edpuzzle</a></p>
-  <h1>Heurísticas en 10 minutos</h1>
-  <p class="meta">Nielsen + Norman en 5 preguntas: cómo saber si una actividad se entiende sin que tengas que explicarla</p>
 
-  <p class="lead">Una <strong>heurística</strong> es una regla práctica para revisar un diseño. Jakob Nielsen hizo una lista de reglas para pantallas, y Don Norman, un psicólogo, explicó por qué la gente se equivoca con las cosas que usa. Los dos llegan a lo mismo: <strong>cuando alguien no sabe usar algo, casi siempre es culpa del diseño, no de la persona.</strong></p>
-
-  <nav class="time" aria-label="Contenido">
-    <a href="#experiencia">1 · Tu experiencia</a>
-    <a href="#preguntas">2 · Las dos preguntas</a>
-    <a href="#principios">3 · Las 5 preguntas</a>
-    <a href="#practica">4 · Practica</a>
-    <a href="#lista">5 · Revisa tu actividad</a>
-  </nav>
-
-  <section class="why" aria-labelledby="para">
-    <h2 id="para">¿Para qué te sirve esto?</h2>
-    <ul>
-      <li>Para <strong>revisar una actividad digital</strong> (Edpuzzle, un formulario, una app) antes de dársela a tus alumnos.</li>
-      <li>Para <strong>explicar por qué algo falla</strong> con palabras claras, no solo "se ve raro" o "no me gustó".</li>
-      <li>Para <strong>proponer mejoras concretas</strong> en vez de rehacer todo.</li>
-    </ul>
+  <section class="cover">
+    <p class="kicker">Para profesores · Heurísticas de Nielsen y Norman · 10 minutos</p>
+    <h1>Si un estudiante se pierde en tu actividad, revisa el diseño antes que al estudiante.</h1>
+    <p class="soft">Esa es la gran idea. Las heurísticas son formas de encontrar en qué parte el diseño no le dio al estudiante lo que necesitaba.</p>
+    <p class="scrollhint"><span>↓</span> Baja para ver la intuición, las 5 preguntas y un ejemplo.</p>
   </section>
 
-  <h2 id="experiencia">1. Empieza por lo que ya sabes</h2>
-  <div class="think">
-    <p><strong>Piensa un momento:</strong> ¿te ha pasado que empujas una puerta y era para jalar? ¿O que no sabes cuál perilla de la estufa prende cuál quemador?</p>
-    <p style="margin:0">No eres torpe. La puerta tenía una manija que "pedía" jalar aunque había que empujar, y las perillas no estaban acomodadas como los quemadores. Eso es un <strong>problema de diseño</strong>. Nielsen y Norman le pusieron nombre a cada tipo de problema, y esos nombres son los que usamos para revisar actividades.</p>
-  </div>
-
-  <h2 id="preguntas">2. Las dos preguntas que se hace cualquier usuario</h2>
-  <p>Cada vez que alguien usa algo, pasa por dos momentos. Si en cualquiera de los dos se queda con dudas, el diseño falló.</p>
-  <div class="gulfs">
-    <div class="gulf"><b>Antes de actuar</b><p class="q">"¿Cómo lo hago?"</p><p style="margin:0">El usuario busca qué botón tocar, dónde escribir, qué se espera de él.</p></div>
-    <div class="gulf"><b>Después de actuar</b><p class="q">"¿Qué pasó?"</p><p style="margin:0">El usuario necesita saber si funcionó, si se guardó, si va bien.</p></div>
-  </div>
-  <p style="margin-top:12px">Norman llama a estas dudas la <em>brecha de ejecución</em> y la <em>brecha de evaluación</em>. Las 5 preguntas de abajo sirven para detectar esas dudas.</p>
-
-  <h2 id="principios">3. Las 5 preguntas para revisar una actividad</h2>
-  <p>Cada pregunta junta una heurística de Nielsen con un concepto de Norman: los dos dicen lo mismo con distinto nombre. Para revisar, abre la actividad como alumno y contesta cada pregunta con <strong>sí</strong> o <strong>no</strong>.</p>
-  <article class="principle">
-    <header><span class="icon" aria-hidden="true">🔔</span><div><h3>1. ¿El usuario entiende qué ocurrió?</h3><small>Nielsen: Visibilidad del estado · Norman: Retroalimentación</small></div></header>
-    <p class="oneline">Después de cada acción, la pantalla debe decir «listo, esto pasó».</p>
-    <div class="ex">
-      <div class="life"><span>En la vida diaria</span>El botón del elevador se ilumina cuando lo aprietas. Si no se ilumina, lo vuelves a apretar.</div>
-      <div class="edp"><span>Lo que encontré en Edpuzzle</span>La actividad pedía leer en voz alta, pero nada registraba la lectura. Al responder, solo decía «To be graded», en inglés y sin mensaje.</div>
+  <section class="step reveal">
+    <p class="kicker">La intuición</p>
+    <h2>Ya lo viviste</h2>
+    <div class="door">
+      <span class="emoji" aria-hidden="true">🚪</span>
+      <p style="margin:0">Empujas una puerta y era para jalar. No eres torpe: <b>la manija te pidió jalar</b> aunque había que empujar. El diseño te dio una pista equivocada.</p>
     </div>
-    <p class="ask"><b>Si la respuesta es «no»:</b> Agregar un mensaje después de cada respuesta y, si es lectura, pedir respuesta de audio.</p>
-  </article>
-  <article class="principle">
-    <header><span class="icon" aria-hidden="true">🧭</span><div><h3>2. ¿La interfaz actúa como esperaba?</h3><small>Nielsen: Consistencia y estándares · Norman: Convenciones y correspondencias</small></div></header>
-    <p class="oneline">Lo que se promete y lo que pasa deben coincidir, y las cosas deben funcionar como en otros lados.</p>
-    <div class="ex">
-      <div class="life"><span>En la vida diaria</span>Las perillas de la estufa acomodadas igual que los quemadores. El rojo es caliente y el azul es frío.</div>
-      <div class="edp"><span>Lo que encontré en Edpuzzle</span>El título decía «70 palabras por minuto», pero el video mostraba una palabra cada 12 segundos.</div>
-    </div>
-    <p class="ask"><b>Si la respuesta es «no»:</b> Que el título, las instrucciones y la actividad digan lo mismo.</p>
-  </article>
-  <article class="principle">
-    <header><span class="icon" aria-hidden="true">🚧</span><div><h3>3. ¿Se previenen acciones equivocadas?</h3><small>Nielsen: Prevención de errores · Norman: Restricciones</small></div></header>
-    <p class="oneline">El diseño debe impedir el error antes de que pase, no solo avisarlo después.</p>
-    <div class="ex">
-      <div class="life"><span>En la vida diaria</span>La USB-C entra por cualquier lado; un formulario no te deja poner letras en el teléfono.</div>
-      <div class="edp"><span>Lo que encontré en Edpuzzle</span>Se podía saltar el video hasta el final y contaba como «completado al 100%».</div>
-    </div>
-    <p class="ask"><b>Si la respuesta es «no»:</b> Bloquear los atajos que arruinan el aprendizaje: en Edpuzzle, activar «Prevent skipping».</p>
-  </article>
-  <article class="principle">
-    <header><span class="icon" aria-hidden="true">👀</span><div><h3>4. ¿Sabe qué acciones puede realizar?</h3><small>Nielsen: Reconocimiento antes que recuerdo · Norman: Significantes y descubribilidad</small></div></header>
-    <p class="oneline">Lo que se puede hacer debe verse; el usuario no tiene que adivinar ni acordarse.</p>
-    <div class="ex">
-      <div class="life"><span>En la vida diaria</span>Un letrero de «Jale» en la puerta. Un menú con fotos en vez de pedir que te sepas los platillos.</div>
-      <div class="edp"><span>Lo que encontré en Edpuzzle</span>La asignación no tenía instrucciones: el alumno solo veía «Start» y tenía que adivinar qué hacer.</div>
-    </div>
-    <p class="ask"><b>Si la respuesta es «no»:</b> Poner instrucciones visibles: qué hacer, cuánto dura y qué se entrega.</p>
-  </article>
-  <article class="principle">
-    <header><span class="icon" aria-hidden="true">↩️</span><div><h3>5. ¿Puede volver o corregir con claridad?</h3><small>Nielsen: Control y libertad · Norman: Modelo conceptual y recuperación</small></div></header>
-    <p class="oneline">El usuario debe entender cómo funciona y poder deshacer o arreglar un error sin perderse.</p>
-    <div class="ex">
-      <div class="life"><span>En la vida diaria</span>El botón «Deshacer» del correo. Un GPS que recalcula la ruta si te equivocas de calle.</div>
-      <div class="edp"><span>Lo que encontré en Edpuzzle</span>Un apodo con acento se rechazaba con «Invalid nickname» sin decir cómo corregirlo. Y al responder, el video regresaba al inicio sin explicar por qué.</div>
-    </div>
-    <p class="ask"><b>Si la respuesta es «no»:</b> Que los errores digan qué pasó y cómo arreglarlo, y que nada pase «de sorpresa».</p>
-  </article>
+    <p style="margin-top:14px">Con las actividades digitales pasa igual. Cuando un estudiante se equivoca o se atora, casi siempre hay algo en la pantalla que no le dijo qué hacer o qué pasó.</p>
+  </section>
 
-  <h2 id="ejemplo">Ejemplo resuelto: la actividad «Velocidad lectora»</h2>
-  <p>Así quedan las 5 preguntas aplicadas a la actividad de Edpuzzle que revisamos:</p>
-  <table class="q5">
-    <thead><tr><th>Pregunta</th><th>Respuesta</th><th>Por qué</th></tr></thead>
-    <tbody>
-      <tr><td data-l="Pregunta"><b>¿El usuario entiende qué ocurrió?</b><small>Visibilidad del estado · Retroalimentación</small></td><td data-l="Respuesta"><span class="ans no">No</span></td><td data-l="Por qué">Nada registra la lectura en voz alta; al responder solo dice «To be graded». <a href="./#p2">Ver problema 2</a></td></tr>
-      <tr><td data-l="Pregunta"><b>¿La interfaz actúa como esperaba?</b><small>Consistencia y estándares · Convenciones y correspondencias</small></td><td data-l="Respuesta"><span class="ans no">No</span></td><td data-l="Por qué">Promete 70 palabras por minuto y muestra una palabra cada 12 segundos. <a href="./#p1">Ver problema 1</a></td></tr>
-      <tr><td data-l="Pregunta"><b>¿Se previenen acciones equivocadas?</b><small>Prevención de errores · Restricciones</small></td><td data-l="Respuesta"><span class="ans no">No</span></td><td data-l="Por qué">Se puede saltar el video y cuenta como completado al 100%. <a href="./#p3">Ver problema 3</a></td></tr>
-      <tr><td data-l="Pregunta"><b>¿Sabe qué acciones puede realizar?</b><small>Reconocimiento antes que recuerdo · Significantes y descubribilidad</small></td><td data-l="Respuesta"><span class="ans part">En parte</span></td><td data-l="Por qué">El botón Start se ve, pero no hay instrucciones de qué hacer. <a href="./#p4">Ver problema 4</a></td></tr>
-      <tr><td data-l="Pregunta"><b>¿Puede volver o corregir con claridad?</b><small>Control y libertad · Modelo conceptual y recuperación</small></td><td data-l="Respuesta"><span class="ans part">En parte</span></td><td data-l="Por qué">El apodo con acento se rechaza sin decir cómo corregirlo. <a href="./#p5">Ver problema 5</a></td></tr>
-    </tbody>
-  </table>
+  <section class="step reveal">
+    <p class="kicker">La idea central</p>
+    <h2>Todo estudiante se hace dos preguntas</h2>
+    <div class="loop" role="img" aria-label="Antes de actuar el estudiante pregunta cómo lo hago; después de actuar pregunta qué pasó">
+      <div class="q"><b>¿Cómo lo hago?</b><small>antes de actuar</small></div>
+      <span class="arrow" aria-hidden="true">⇄</span>
+      <div class="q"><b>¿Qué pasó?</b><small>después de actuar</small></div>
+    </div>
+    <p class="loopnote">Norman las llama brecha de ejecución y brecha de evaluación.</p>
+    <p style="margin-top:12px">Una buena actividad contesta las dos <strong>sin que tú tengas que explicar</strong>. Las heurísticas son 5 maneras de revisar si lo logra.</p>
+  </section>
 
-  <h2 id="practica">4. Practica: ¿qué pregunta falla?</h2>
-  <p>Elige una respuesta. No hay calificación; es para que lo pruebes.</p>
-  <div id="quiz"></div>
-  <p class="score" id="score" aria-live="polite"></p>
+  <section class="step" aria-labelledby="h5">
+    <p class="kicker">Las herramientas</p>
+    <h2 id="h5">5 preguntas para revisar cualquier actividad</h2>
+    <p class="soft">Ábrela como si fueras estudiante y contesta sí o no. Cada pregunta junta una heurística de Nielsen con un concepto de Norman.</p>
 
-  <h2 id="lista">5. Revisa tu propia actividad</h2>
-  <p>Abre tu actividad como si fueras alumno y marca lo que sí se cumple. Lo que quede sin marcar es tu lista de mejoras.</p>
-  <ul class="check">
-    <li><label><input type="checkbox"> <span><b>¿El usuario entiende qué ocurrió?</b><small>Después de cada respuesta hay un mensaje; se sabe si se guardó.</small></span></label></li>
-    <li><label><input type="checkbox"> <span><b>¿La interfaz actúa como esperaba?</b><small>Título, instrucciones y actividad dicen lo mismo.</small></span></label></li>
-    <li><label><input type="checkbox"> <span><b>¿Se previenen acciones equivocadas?</b><small>No se puede brincar lo importante («Prevent skipping»).</small></span></label></li>
-    <li><label><input type="checkbox"> <span><b>¿Sabe qué acciones puede realizar?</b><small>Hay instrucciones visibles y el primer paso es obvio.</small></span></label></li>
-    <li><label><input type="checkbox"> <span><b>¿Puede volver o corregir con claridad?</b><small>Los errores dicen cómo arreglarse; nada pasa de sorpresa.</small></span></label></li>
-  </ul>
-  <div class="actions">
-    <button class="btn" type="button" onclick="window.print()">🖨️ Imprimir esta guía</button>
-    <a class="btn ghost" href="./">Ver la evaluación completa</a>
-  </div>
+    <div class="track">
+      <article class="q5 reveal">
+        <span class="n">1</span>
+        <h3>¿El estudiante entiende qué ocurrió?</h3>
+        <p class="tag">Nielsen: visibilidad del estado · Norman: retroalimentación</p>
+        <p class="idea">Cada acción debe responder «listo, esto pasó».</p>
+        <details><summary>Ejemplos</summary><div class="body">
+          <b>En la vida diaria</b><p>El botón del elevador se ilumina cuando lo aprietas.</p>
+          <b>En Edpuzzle</b><p>La actividad pedía leer en voz alta, pero nada registraba la lectura.</p>
+          <p class="fix">Si no: agrega un mensaje después de cada respuesta.</p>
+        </div></details>
+      </article>
+
+      <article class="q5 reveal">
+        <span class="n">2</span>
+        <h3>¿La actividad funciona como el estudiante espera?</h3>
+        <p class="tag">Nielsen: consistencia y estándares · Norman: convenciones y correspondencias</p>
+        <p class="idea">Lo que se promete y lo que pasa deben coincidir.</p>
+        <details><summary>Ejemplos</summary><div class="body">
+          <b>En la vida diaria</b><p>Las perillas de la estufa acomodadas igual que los quemadores.</p>
+          <b>En Edpuzzle</b><p>El título decía 70 palabras por minuto y el video mostraba una palabra cada 12 segundos.</p>
+          <p class="fix">Si no: que título, instrucciones y actividad digan lo mismo.</p>
+        </div></details>
+      </article>
+
+      <article class="q5 reveal">
+        <span class="n">3</span>
+        <h3>¿Se evitan los errores del estudiante?</h3>
+        <p class="tag">Nielsen: prevención de errores · Norman: restricciones</p>
+        <p class="idea">Mejor impedir el error que avisarlo después.</p>
+        <details><summary>Ejemplos</summary><div class="body">
+          <b>En la vida diaria</b><p>Un formulario que no te deja escribir letras en el teléfono.</p>
+          <b>En Edpuzzle</b><p>Se podía saltar el video y contaba como completado al 100%.</p>
+          <p class="fix">Si no: bloquea el atajo. En Edpuzzle, activa Prevent skipping.</p>
+        </div></details>
+      </article>
+
+      <article class="q5 reveal">
+        <span class="n">4</span>
+        <h3>¿El estudiante sabe qué puede hacer?</h3>
+        <p class="tag">Nielsen: reconocimiento antes que recuerdo · Norman: significantes y descubribilidad</p>
+        <p class="idea">Lo que se puede hacer debe verse, no adivinarse.</p>
+        <details><summary>Ejemplos</summary><div class="body">
+          <b>En la vida diaria</b><p>Un letrero de «Jale» en la puerta.</p>
+          <b>En Edpuzzle</b><p>Solo se veía el botón Start, sin instrucciones de qué hacer.</p>
+          <p class="fix">Si no: pon instrucciones visibles al inicio.</p>
+        </div></details>
+      </article>
+
+      <article class="q5 reveal">
+        <span class="n">5</span>
+        <h3>¿El estudiante puede volver o corregir?</h3>
+        <p class="tag">Nielsen: control y libertad · Norman: modelo conceptual y recuperación</p>
+        <p class="idea">Equivocarse debe tener salida, y entenderse.</p>
+        <details><summary>Ejemplos</summary><div class="body">
+          <b>En la vida diaria</b><p>El botón Deshacer del correo. El GPS que recalcula la ruta.</p>
+          <b>En Edpuzzle</b><p>Un apodo con acento se rechazaba sin decir cómo corregirlo.</p>
+          <p class="fix">Si no: que cada error diga qué pasó y cómo arreglarlo.</p>
+        </div></details>
+      </article>
+    </div>
+  </section>
+
+  <section class="step reveal">
+    <p class="kicker">Un ejemplo completo</p>
+    <h2>La actividad «Velocidad lectora», con las 5 preguntas</h2>
+    <ul class="answers">
+      <li><span class="ans no">No</span><span><b>¿Entiende qué ocurrió?</b> Nada registra la lectura en voz alta.</span></li>
+      <li><span class="ans no">No</span><span><b>¿Funciona como espera?</b> Promete 70 palabras por minuto y muestra unas 5.</span></li>
+      <li><span class="ans no">No</span><span><b>¿Se evitan errores?</b> Se puede saltar el video.</span></li>
+      <li><span class="ans part">En parte</span><span><b>¿Sabe qué puede hacer?</b> Hay botón Start, pero no instrucciones.</span></li>
+      <li><span class="ans part">En parte</span><span><b>¿Puede corregir?</b> El apodo con acento falla sin explicar por qué.</span></li>
+    </ul>
+    <p class="soft" style="margin-top:10px">Tres «no» en una actividad tan corta. El estudiante no se equivocó: la actividad no le dio lo que necesitaba.</p>
+  </section>
+
+  <section class="step" id="practica">
+    <p class="kicker">Practica</p>
+    <h2>¿Qué pregunta falla?</h2>
+    <p class="soft">Sin calificación. Si fallas, piensa: ¿la duda del estudiante está antes de actuar o después?</p>
+    <div id="quiz"></div>
+    <p class="score" id="score" aria-live="polite"></p>
+  </section>
+
+  <section class="step reveal">
+    <p class="kicker">Úsalo</p>
+    <h2>Revisa tu propia actividad</h2>
+    <ul class="check">
+      <li><label><input type="checkbox"><span><b>¿El estudiante entiende qué ocurrió?</b><small>Después de cada respuesta hay un mensaje.</small></span></label></li>
+      <li><label><input type="checkbox"><span><b>¿Funciona como espera?</b><small>Título, instrucciones y actividad dicen lo mismo.</small></span></label></li>
+      <li><label><input type="checkbox"><span><b>¿Se evitan errores?</b><small>No se puede brincar lo importante.</small></span></label></li>
+      <li><label><input type="checkbox"><span><b>¿Sabe qué puede hacer?</b><small>Hay instrucciones visibles y el primer paso es obvio.</small></span></label></li>
+      <li><label><input type="checkbox"><span><b>¿Puede corregir?</b><small>Los errores dicen cómo arreglarse.</small></span></label></li>
+    </ul>
+    <button class="btn" type="button" onclick="window.print()">Imprimir</button>
+  </section>
+
+  <section class="step reveal">
+    <div class="recap">
+      <p class="kicker">Para llevar</p>
+      <p class="big">Una buena actividad contesta <em>¿cómo lo hago?</em> y <em>¿qué pasó?</em> sin que tengas que explicarlo.</p>
+    </div>
+  </section>
 
   <footer>
-    <p>Basado en Norman, D. (2013). <em>The Design of Everyday Things</em>, edición revisada. Basic Books · <a href="https://www.nngroup.com/articles/ten-usability-heuristics/">Nielsen, 10 heurísticas de usabilidad</a>.</p>
-    <p>Las explicaciones son una adaptación propia en lenguaje sencillo.</p>
+    <p>Basado en Norman, D. (2013). <em>The Design of Everyday Things</em>. Basic Books · <a href="https://www.nngroup.com/articles/ten-usability-heuristics/">Nielsen, 10 heurísticas de usabilidad</a>. Adaptación propia en lenguaje sencillo.</p>
   </footer>
 </main>
 
 <script>
-const PREGUNTAS = [
-  {q:"Envías una tarea en una plataforma y la pantalla se queda igual. No sabes si se mandó.", a:"¿Entiende qué ocurrió?", why:"Después de actuar, el usuario necesita saber qué pasó. Un mensaje de «Enviado ✔» lo resolvería."},
-  {q:"Un examen en línea deja dar clic en «Terminar» sin haber contestado ninguna pregunta.", a:"¿Se previenen errores?", why:"El diseño debería impedir ese error: desactivar el botón o avisar antes de terminar."},
-  {q:"Un video se llama «Repaso de fracciones», pero habla de decimales.", a:"¿Actúa como esperaba?", why:"Lo que se promete (el título) no coincide con lo que pasa (el contenido)."},
-  {q:"Escribes mal tu correo en un registro y la página solo dice «Error», sin decir qué corregir.", a:"¿Puede volver o corregir?", why:"El usuario necesita saber cómo arreglar su error. «Al correo le falta la @» lo resolvería."},
-  {q:"Abres una actividad y solo ves un botón de «Play», sin decir qué tienes que hacer después.", a:"¿Sabe qué puede hacer?", why:"Lo que hay que hacer debe verse. Unas instrucciones visibles cerrarían la duda «¿cómo lo hago?»."},
+document.documentElement.classList.add("js");
+const bar=document.getElementById("bar");
+const onScroll=()=>{const h=document.documentElement; const p=h.scrollTop/((h.scrollHeight-h.clientHeight)||1); bar.style.transform=`scaleX(${p})`;};
+addEventListener("scroll",onScroll,{passive:true}); onScroll();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{rootMargin:"0px 0px -10% 0px"});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+setTimeout(()=>document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in")),2500);
+
+const PREGUNTAS=[
+  {q:"El estudiante envía una tarea y la pantalla se queda igual. No sabe si se mandó.",a:1,why:"Después de actuar no hubo respuesta. Un «Enviado ✔» lo resuelve."},
+  {q:"Un video se llama «Repaso de fracciones», pero habla de decimales.",a:2,why:"Lo que promete el título no coincide con lo que pasa."},
+  {q:"Un examen deja dar clic en «Terminar» sin contestar nada.",a:3,why:"El diseño debería impedir ese error antes de que pase."},
+  {q:"El estudiante abre una actividad y solo ve un botón de «Play», sin instrucciones.",a:4,why:"Lo que hay que hacer no se ve; hay que adivinarlo."},
+  {q:"El estudiante escribe mal su correo y la página solo dice «Error».",a:5,why:"El error no dice cómo corregirlo."}
 ];
-const OPCIONES = ["¿Entiende qué ocurrió?","¿Actúa como esperaba?","¿Se previenen errores?","¿Sabe qué puede hacer?","¿Puede volver o corregir?"];
-const quiz = document.getElementById("quiz"); const done = new Set();
-PREGUNTAS.forEach((p,i) => {
-  const box = document.createElement("div"); box.className="quiz";
-  box.innerHTML = `<p>${i+1}. ${p.q}</p><div class="opts" role="group" aria-label="Opciones de la pregunta ${i+1}"></div><div class="fb" aria-live="polite"></div>`;
-  const opts = box.querySelector(".opts"), fb = box.querySelector(".fb");
-  OPCIONES.forEach(o => {
-    const b = document.createElement("button"); b.type="button"; b.textContent=o;
-    b.addEventListener("click", () => {
-      opts.querySelectorAll("button").forEach(x=>x.classList.remove("right","wrong"));
-      if(o===p.a){ b.classList.add("right"); fb.textContent="✔ ¡Exacto! "+p.why; done.add(i); }
-      else { b.classList.add("wrong"); fb.textContent="Casi. Piensa: ¿el problema está antes de actuar o después? Intenta otra vez."; }
-      document.getElementById("score").textContent = done.size===PREGUNTAS.length ? "🎉 Las identificaste todas. Ya puedes usar la lista de abajo con tu actividad." : `Llevas ${done.size} de ${PREGUNTAS.length}.`;
-    });
-    opts.append(b);
-  });
+const OPC=["1 · ¿Qué ocurrió?","2 · ¿Como espera?","3 · ¿Se evita el error?","4 · ¿Qué puede hacer?","5 · ¿Puede corregir?"];
+const quiz=document.getElementById("quiz"), done=new Set();
+PREGUNTAS.forEach((p,i)=>{
+  const box=document.createElement("div"); box.className="quiz";
+  box.innerHTML=`<p>${p.q}</p><div class="opts" role="group" aria-label="Opciones"></div><div class="fb" aria-live="polite"></div>`;
+  const opts=box.querySelector(".opts"), fb=box.querySelector(".fb");
+  OPC.forEach((o,k)=>{const b=document.createElement("button"); b.type="button"; b.textContent=o;
+    b.addEventListener("click",()=>{opts.querySelectorAll("button").forEach(x=>x.classList.remove("right","wrong"));
+      if(k+1===p.a){b.classList.add("right"); fb.textContent="✔ "+p.why; done.add(i);} else {b.classList.add("wrong"); fb.textContent="Casi. ¿La duda está antes de actuar o después?";}
+      document.getElementById("score").textContent = done.size===PREGUNTAS.length ? "🎉 Las cinco. Ya puedes revisar tu propia actividad." : `Llevas ${done.size} de ${PREGUNTAS.length}.`;});
+    opts.append(b);});
   quiz.append(box);
 });
 </script>
