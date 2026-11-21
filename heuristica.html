@@ -63,6 +63,16 @@ p{margin:0 0 10px;text-wrap:pretty}
 .village{position:absolute;left:0;right:0;bottom:0;height:150px}
 .village svg{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:max(1200px,100%);height:150px}
 
+/* ---------- contenedor de vidrio ---------- */
+.glass{position:relative;max-width:1180px;margin:22px auto 170px;border-radius:32px;
+  background:linear-gradient(160deg, oklch(1 0 0 / .62), oklch(1 0 0 / .42));
+  -webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4);
+  border:1px solid oklch(1 0 0 / .75);
+  box-shadow:0 1px 0 oklch(1 0 0 / .9) inset, 0 -1px 0 oklch(0.7 0.03 230 / .25) inset, 0 24px 60px oklch(0.45 0.06 230 / .22)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(70% 40% at 20% 0%, oklch(1 0 0 / .55), transparent 70%)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){ .glass{background:oklch(0.98 0.01 220 / .93)} }
+
 /* ---------- portada ---------- */
 .cover{max-width:760px;margin:0 auto;padding:56px 20px 28px;text-align:center}
 .tag{display:inline-block;font-weight:700;font-size:.8rem;background:var(--note);padding:4px 12px;transform:rotate(-1.5deg);box-shadow:0 2px 0 oklch(0.85 0.08 95)}
@@ -113,6 +123,14 @@ p{margin:0 0 10px;text-wrap:pretty}
 .chalk-label.b{background:var(--chalk-pink);color:oklch(0.3 0.08 20)}
 .chalk-label.a{background:var(--chalk-yellow);color:oklch(0.32 0.06 90)}
 
+/* puertas */
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:440px}
+.door-fig{margin:0;text-align:center}
+.door-fig svg{width:100%;max-width:150px;height:auto;color:var(--chalk)}
+.door-fig figcaption{font-family:"Kalam",cursive;font-size:.98rem;line-height:1.25;margin-top:4px}
+.door-fig figcaption b{display:block;font-size:1.1rem}
+.pink{color:var(--chalk-pink)} .blue{color:var(--chalk-blue)}
+
 /* dos preguntas */
 .loop{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:6px}
 .bubble{font-family:"Kalam",cursive;font-weight:700;font-size:1.5rem;border:3px solid var(--chalk);border-radius:50% 45% 52% 48%/55% 50% 48% 52%;padding:22px 26px;text-align:center;line-height:1.1}
@@ -151,7 +169,7 @@ p{margin:0 0 10px;text-wrap:pretty}
 .example b{color:var(--ink)}
 
 /* ---------- después del scrolly ---------- */
-.after-zone{max-width:760px;margin:0 auto;padding:30px 20px 190px}
+.after-zone{max-width:760px;margin:0 auto;padding:30px 20px 40px}
 .after-zone h2{font-family:"Kalam",cursive;font-size:1.8rem;margin-bottom:6px}
 .after-zone > p{color:var(--ink)}
 .notes{position:relative;min-height:230px;margin-top:16px}
@@ -187,6 +205,8 @@ footer a{color:var(--pen)}
 
 /* ---------- móvil: pizarrón arriba, hojas abajo ---------- */
 @media (max-width:820px){
+  .glass{margin:10px 8px 160px;border-radius:22px}
+  .doors{gap:10px}
   .scrolly{grid-template-columns:1fr;gap:0}
   .stage{top:8px;height:44vh}
   .scene{padding:18px 20px 26px}
@@ -206,6 +226,7 @@ footer a{color:var(--pen)}
 }
 @media print{
   .progress,.stage,.down,#practica,.sky{display:none}
+  .glass{background:none;box-shadow:none;border:none;backdrop-filter:none}
   .scrolly{display:block}
   .step{min-height:0;padding:6px 0}
   .more{display:block}
@@ -233,6 +254,7 @@ footer a{color:var(--pen)}
 </div>
 
 
+<main class="glass">
 <header class="cover">
   <span class="tag">Para profesores · 10 minutos</span>
   <h1>Si un estudiante se pierde en tu actividad, <mark>revisa el diseño</mark> antes que al estudiante.</h1>
@@ -250,14 +272,27 @@ footer a{color:var(--pen)}
       </div>
 
       <div class="scene" data-scene="puerta">
-        <p class="chalk-title">La intuición</p>
-        <svg viewBox="0 0 220 220" width="190" style="max-width:48%">
-          <rect x="40" y="10" width="140" height="200" rx="6" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="3 2"/>
-          <rect x="140" y="95" width="30" height="10" rx="5" fill="oklch(0.9 0.12 95)"/>
-          <rect x="70" y="40" width="80" height="30" rx="4" fill="none" stroke="oklch(0.82 0.1 15)" stroke-width="3"/>
-          <text x="110" y="61" text-anchor="middle" font-family="Kalam" font-size="18" fill="oklch(0.82 0.1 15)">EMPUJE</text>
-        </svg>
-        <p class="chalk-note">La manija dice «jala». El letrero dice «empuja». ¿A quién le crees?</p>
+        <p class="chalk-title">La intuición · la puerta de Norman</p>
+        <div class="doors">
+          <figure class="door-fig">
+            <svg viewBox="0 0 160 200" aria-hidden="true">
+              <rect x="20" y="10" width="120" height="180" rx="6" fill="none" stroke="currentColor" stroke-width="4"/>
+              <rect x="104" y="70" width="12" height="60" rx="6" fill="oklch(0.9 0.12 95)"/>
+              <text x="80" y="35" text-anchor="middle" font-family="Kalam" font-size="15" fill="oklch(0.82 0.1 15)">EMPUJE</text>
+              <text x="80" y="35" dy="150" text-anchor="middle" font-family="Kalam" font-size="13" fill="oklch(0.82 0.1 15)">manija de jalar</text>
+            </svg>
+            <figcaption><b class="pink">✗ Confunde</b>La manija dice «jálame».<br>Tu mano jala… y no abre.</figcaption>
+          </figure>
+          <figure class="door-fig">
+            <svg viewBox="0 0 160 200" aria-hidden="true">
+              <rect x="20" y="10" width="120" height="180" rx="6" fill="none" stroke="currentColor" stroke-width="4"/>
+              <rect x="92" y="78" width="34" height="44" rx="4" fill="oklch(0.85 0.07 230)"/>
+              <text x="80" y="185" text-anchor="middle" font-family="Kalam" font-size="13" fill="oklch(0.85 0.07 230)">placa para empujar</text>
+            </svg>
+            <figcaption><b class="blue">✓ Se entiende</b>Una placa plana no se puede jalar.<br>Ni falta hace el letrero.</figcaption>
+          </figure>
+        </div>
+        <p class="chalk-note">El diseño le habla a la mano antes que el letrero a los ojos.</p>
       </div>
 
       <div class="scene" data-scene="dos">
@@ -350,9 +385,11 @@ footer a{color:var(--pen)}
     <section class="step" data-scene="puerta">
       <div class="sheet">
         <p class="num">La intuición</p>
-        <h2>Ya lo viviste con una puerta</h2>
-        <p class="lead">Empujas y era para jalar. No eres torpe: la manija te pidió jalar. El diseño te dio una pista equivocada, y tú la seguiste.</p>
-        <p>Tus estudiantes hacen lo mismo con una actividad: siguen las pistas que ven.</p>
+        <h2>La puerta con manija de jalar que se abre empujando</h2>
+        <p class="lead">Una puerta tiene una manija de las que se agarran para jalar, pero se abre empujando. Arriba tiene un letrero: «Empuje».</p>
+        <p>¿Qué hace casi todo mundo? <b>Jala.</b> La mano obedece a la manija antes de que los ojos lean el letrero. No es falta de atención: la manija dio una pista equivocada.</p>
+        <p>El arreglo no es un letrero más grande. Es cambiar la manija por una placa plana, que solo se puede empujar.</p>
+        <p class="term"><b>En tu salón:</b> si tienes que explicar una actividad tres veces, es como poner un letrero más grande en la puerta. Mejor cambia la manija.</p>
       </div>
     </section>
 
@@ -479,6 +516,8 @@ footer a{color:var(--pen)}
     Basado en Norman, D. (2013). <em>The Design of Everyday Things</em>. Basic Books · <a href="https://www.nngroup.com/articles/ten-usability-heuristics/">Nielsen, 10 heurísticas de usabilidad</a>. Adaptación propia en lenguaje sencillo.
   </footer>
 </div>
+
+</main>
 
 <script>
 // barra de progreso
